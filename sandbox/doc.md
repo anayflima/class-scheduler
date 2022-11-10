@@ -1,13 +1,33 @@
 # Class Scheduler
 
-## Introduction
+<!--
+README:
+    intro
+    htpw
+    logic
+    parsers summary (fixed, semestral)
+    directory tree
+    about us
+MODEL:
+    model
+TABLE:
+    hc indexes
+    sc indexes
+PARSERS:
+    how the parsers work
+    fixed input parser
+    semester input parser
+-->
 
+## Introduction
 
 This project aims to facilitate the process of scheduling classes. Given the classes that must be taught that semester, their frequency, the professors who lectures each class and the professors' availability the program generates timetables that follow the restrictions. In addition, we seek to improve the program by giving weak restrictions that can be used to decide which are the best schedules generated. The program uses [Potassco Clingo ASP language](https://potassco.org/) to resolve the problem by satisfability. We also provide parsers (between csv tables and clingo language) to facilitate the use of our program.
 
 ## How the program works
 
+<!--
 csv input files > clingo input files > satisfies hard constrains (restrictions) > weights soft constrains (weak restrictions) > models with scores > csv schedule table
+-->
 
 ## Logic
 
@@ -16,13 +36,22 @@ The project was divided in two main parts:
 
 The restriction rules, or "hard constrains" of out model, are the clauses that define if a model is Satifable or not. If one rule is not true, than the model is unsatifable, if all rules are true, than we have a satisfable solution.
 
-This constrains can be divaded into: 
-- basic contrais: general rules used
+These constrains can be divaded into: 
+- basic contrais: general rules used for the logic enviroment preparation
 - specific hard constrains: rules that need to be true for the Computer Science course (ex: two obligatory classes for the same year can't be given in the same time). 
 
+2. writing decisions rules
+
+The decisions rules, or "soft constrains", are used to score the satisfable responses. A soft contrain will never discart a model, but if not true, will give negative score for the schedule generated. This rules aims to facilitate the decision of which schedule should be chosen. 
+
+This rules and their weights was discussed between the students and represents what would make and ideal schedule for a semester in the CS course.
+ 
 ## About Us
 We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during MAC0472 course in the second semester of 2022.
 
+<!--
+Clients and teacher?
+-->
 
 ## Model
 - The *Input*'s predicates are used to populate the model.
