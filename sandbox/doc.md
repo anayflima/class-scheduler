@@ -2,14 +2,16 @@
 
 <!--
 README:
-    intro
-    htpw
-    logic
-    parsers summary (fixed, semestral)
+    intro ok
+    htpw ok
+    logic ok
+    parsers summary (fixed, semestral) ok
+    tests
     directory tree
     about us
 MODEL:
-    model
+    model ok
+        falar sobre escolha dos horários (talvez fazer arquivo para pegar esses horários)
 TABLE:
     hc indexes
     sc indexes
@@ -21,37 +23,79 @@ PARSERS:
 
 ## Introduction
 
-This project aims to facilitate the process of scheduling classes. Given the classes that must be taught that semester, their frequency, the professors who lectures each class and the professors' availability the program generates timetables that follow the restrictions. In addition, we seek to improve the program by giving weak restrictions that can be used to decide which are the best schedules generated. The program uses [Potassco Clingo ASP language](https://potassco.org/) to resolve the problem by satisfability. We also provide parsers (between csv tables and clingo language) to facilitate the use of our program.
+This project aims to facilitate the process of scheduling classes. Given the classes that must be taught that semester, their frequency, the professors who lectures each class and the professors' availability the program generates timetables that follow the restrictions. In addition, we seek to improve the program by giving weak restrictions that can be used to decide which are the best schedules generated. The program uses [Potassco Clingo ASP language](https://potassco.org/) to resolve the problem by satisfiability. We also provide parsers (between csv tables and clingo language) to facilitate the use of our program.
 
 ## How the program works
 
 <!--
-csv input files > clingo input files > satisfies hard constrains (restrictions) > weights soft constrains (weak restrictions) > models with scores > csv schedule table
+Make UML
+
+csv input files > clingo input files > satisfies hard constraints (restrictions) > weights soft constraints (weak restrictions) > models with scores > csv schedule table
+
+Once finished, explain the commands to run
+
+Direct to the contributing file
 -->
 
 ## Logic
 
 The project was divided in two main parts:
-1. writing retriction rules
+1. writing restriction rules
 
-The restriction rules, or "hard constrains" of out model, are the clauses that define if a model is Satifable or not. If one rule is not true, than the model is unsatifable, if all rules are true, than we have a satisfable solution.
+The restriction rules, or "hard constraints " of out model, are the clauses that define if a model is Satisfiable or not. If one rule is not true, than the model is unsatisfiable, if all rules are true, then we have a satisfiable solution.
 
-These constrains can be divaded into: 
-- basic contrais: general rules used for the logic enviroment preparation
-- specific hard constrains: rules that need to be true for the Computer Science course (ex: two obligatory classes for the same year can't be given in the same time). 
+These constraints can be divided into: 
+- basic contrais: general rules used for the logic environment preparation
+- specific hard constraints: rules that need to be true for the Computer Science program (ex: two obligatory classes for the same year can't be given at the same time). 
 
 2. writing decisions rules
 
-The decisions rules, or "soft constrains", are used to score the satisfable responses. A soft contrain will never discart a model, but if not true, will give negative score for the schedule generated. This rules aims to facilitate the decision of which schedule should be chosen. 
+The decision rules, or "soft constraints", are used to score the satisfiable responses. A soft constraint will never discard a model, but if not true, will give a negative score for the schedule generated. This rules aims to facilitate the decision of which schedule should be chosen. 
 
-This rules and their weights was discussed between the students and represents what would make and ideal schedule for a semester in the CS course.
+These rules and their weights were discussed between the students and represents what would make an ideal schedule for a semester in the CS course.
  
 ## About Us
-We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during MAC0472 course in the second semester of 2022.
+We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during the MAC0472 course in the second semester of 2022.
 
 <!--
 Clients and teacher?
 -->
+
+## Parsers
+
+To facilitate the usage of our program, we provided three parsers:
+<!-- 
+It is still in production
+-->
+
+### Fixed Input Parser
+For the names, classes per week, curriculum, obligatoriness and other fixed characteristics of a course we created a table containing these informations. We then used a parser to transform the table in ASP clausules. These clausules only need to be generated once, and are specific for the Computer Science program. For using this parser, consult the parser documentation in the parser directory.
+<!--
+Write better read me in the parser directory
+-->
+
+### Semestral Input Parser
+The information regarding the teacher availability, preferable time, workload and the courses that will be given that semester is given as a table by the Computer Science’s Commission, the semestral parser aims to transform the table given in ASP clausules. This parser will be used every semester and supposes that the tables are patronized. 
+For using this parser, consult the parser documentation in the parser directory.
+<!--
+Write better read me in the parser directory
+-->
+
+### Output Parser
+After running clingo, the output will be given in ASP clausules. To help read and transport the results, we created a parser that can transform these clausules into csv tables. The user can choose to print this table in the terminal (uses python [tabule](https://pypi.org/project/tabulate/) ) or save in a csv file.
+
+## Tests
+
+### Hard Constraints
+For each constraint we wrote an individual test set that can identify if the satisfiability and unsatisfiability are being corrected recognized. All tests can be run in the development environment with the command:
+
+```
+docker compose up test
+```
+
+### Soft Constraints
+For each soft constraint we wrote an example of a schedule that would be chosen by that decision rule. This test aims to manually verify if the constraint written will give more weight for the desired schedule.
+
 
 ## Model
 - The *Input*'s predicates are used to populate the model.
@@ -130,6 +174,17 @@ Example:
 ```
 double(macAAA).
 ```
+
+####  **joint/1(teacher_id)**:
+
+Indicates courses that are lectured together, normally one from graduation and other from postgraduation.
+Example:
+
+```
+joint(macAAA, macBBB).
+```
+
+
 ### Input - Weak Constrains Input Predicates
 ####  **curriculum/2(course id, curriculum, required)**: 
 
@@ -139,6 +194,16 @@ Example:
 ```
 curriculum(macCCC, systems, 1).
 curriculum(macCCC, ai, 0).
+```
+####  **preferable/2(teacher name, period)** 
+
+Indicates a teacher's available preferable period.
+
+Example:
+```
+preferable(profAAA, 121). % profAAA prefers to lecture classes on monday's first period of the afternoon
+
+preferable(profAAA, 212). % profAAA prefers to lecture classes on tuesday's second period of the morning
 ```
 
 ### Output
@@ -199,13 +264,4 @@ Example:
 ```
 teacher(profAAA).
 teacher(profBBB).
-```
-####  **joint/1(teacher_id)**:
-
-Indicates classes that are lectured together, normally one from graduation and other from postgraduation.
-
-Example:
-
-```
-joint(macAAA, macBBB).
 ```
