@@ -24,7 +24,9 @@ PARSERS:
 ## Introduction
 
 This project aims to facilitate the process of scheduling classes. Given the classes that must be taught that semester, their frequency, the professors who lectures each class and the professors' availability the program generates timetables that follow the restrictions. In addition, we seek to improve the program by giving weak restrictions that can be used to decide which are the best schedules generated. The program uses [Potassco Clingo ASP language](https://potassco.org/) to resolve the problem by satisfiability. We also provide parsers (between csv tables and clingo language) to facilitate the use of our program.
-
+<!--
+- [About Us](#about-us) 
+-->
 ## How the program works
 
 <!--
@@ -53,7 +55,9 @@ These constraints can be divided into:
 The decision rules, or "soft constraints", are used to score the satisfiable responses. A soft constraint will never discard a model, but if not true, will give a negative score for the schedule generated. This rules aims to facilitate the decision of which schedule should be chosen. 
 
 These rules and their weights were discussed between the students and represents what would make an ideal schedule for a semester in the CS course.
- 
+
+<a name="about-us"/>
+
 ## About Us
 We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during the MAC0472 course in the second semester of 2022.
 
