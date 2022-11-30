@@ -1,32 +1,37 @@
 # Class Scheduler
 
-<!--
-README:
-    intro ok
-    htpw ok
-    logic ok
-    parsers summary (fixed, semestral) ok
-    tests
-    directory tree
-    about us
-MODEL:
-    model ok
-        falar sobre escolha dos horários (talvez fazer arquivo para pegar esses horários)
-TABLE:
-    hc indexes
-    sc indexes
-PARSERS:
-    how the parsers work
-    fixed input parser
-    semester input parser
--->
-
 ## Introduction
 
 This project aims to facilitate the process of scheduling classes. Given the classes that must be taught that semester, their frequency, the professors who lectures each class and the professors' availability the program generates timetables that follow the restrictions. In addition, we seek to improve the program by giving weak restrictions that can be used to decide which are the best schedules generated. The program uses [Potassco Clingo ASP language](https://potassco.org/) to resolve the problem by satisfiability. We also provide parsers (between csv tables and clingo language) to facilitate the use of our program.
-<!--
+
+### Table of Content:
+- [Running the code](#how-run) <!--- to do -->
+- [How the program works](#how-works) <!--- to do -->
+- [Logic](#logic)
+- [Constrains Indexes](#index) <!--- to do -->
+    - [Hard Constraints](#index-hard) <!--- to do -->
+    - [Soft Constraints](#index-soft) <!--- to do -->
+- [Parsers](#parser)
+    - [Fixed Input](#parser-input-fixed)
+    - [Semestral Input](#parser-input-semestral)
+    - [Output](#parser-output)
+- [Tests](#tests)
+    - [Hard Constraints](#tests-hard)
+    - [Soft Constraints](#tests-soft)
+- [Model](#model)
+    - [Input Hard Constraints](#model-input-hard)
+    - [Input Soft Constraints](#model-input-soft)
+    - [Output](#model-output)
+    - [Supporting](#model-supporting)
 - [About Us](#about-us) 
--->
+
+
+<a name="how-run"/>
+
+## Running the code
+
+<a name="how-works"/>
+
 ## How the program works
 
 <!--
@@ -38,6 +43,8 @@ Once finished, explain the commands to run
 
 Direct to the contributing file
 -->
+
+<a name="logic"/>
 
 ## Logic
 
@@ -56,14 +63,27 @@ The decision rules, or "soft constraints", are used to score the satisfiable res
 
 These rules and their weights were discussed between the students and represents what would make an ideal schedule for a semester in the CS course.
 
-<a name="about-us"/>
+<a name="index"/>
 
-## About Us
-We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during the MAC0472 course in the second semester of 2022.
+## Constraints Indexes
 
-<!--
-Clients and teacher?
--->
+<a name="index-hard"/>
+
+### Hard Constraints
+
+<a name="index-soft"/>
+
+<!---
+make table
+--->
+
+### Soft Constraints
+
+<!---
+make table
+--->
+
+<a name="parser"/>
 
 ## Parsers
 
@@ -72,23 +92,27 @@ To facilitate the usage of our program, we provided three parsers:
 It is still in production
 -->
 
+<a name="parser-input-fixed"/>
+
 ### Fixed Input Parser
 For the names, classes per week, curriculum, obligatoriness and other fixed characteristics of a course we created a table containing these informations. We then used a parser to transform the table in ASP clausules. These clausules only need to be generated once, and are specific for the Computer Science program. For using this parser, consult the parser documentation in the parser directory.
-<!--
-Write better read me in the parser directory
--->
+
+<a name="parser-input-semestral"/>
 
 ### Semestral Input Parser
 The information regarding the teacher availability, preferable time, workload and the courses that will be given that semester is given as a table by the Computer Science’s Commission, the semestral parser aims to transform the table given in ASP clausules. This parser will be used every semester and supposes that the tables are patronized. 
 For using this parser, consult the parser documentation in the parser directory.
-<!--
-Write better read me in the parser directory
--->
+
+<a name="parser-output"/>
 
 ### Output Parser
 After running clingo, the output will be given in ASP clausules. To help read and transport the results, we created a parser that can transform these clausules into csv tables. The user can choose to print this table in the terminal (uses python [tabule](https://pypi.org/project/tabulate/) ) or save in a csv file.
 
+<a name="tests"/>
+
 ## Tests
+
+<a name="tests-hard"/>
 
 ### Hard Constraints
 For each constraint we wrote an individual test set that can identify if the satisfiability and unsatisfiability are being corrected recognized. All tests can be run in the development environment with the command:
@@ -96,10 +120,12 @@ For each constraint we wrote an individual test set that can identify if the sat
 ```
 docker compose up test
 ```
+<a name="tests-soft"/>
 
 ### Soft Constraints
 For each soft constraint we wrote an example of a schedule that would be chosen by that decision rule. This test aims to manually verify if the constraint written will give more weight for the desired schedule.
 
+<a name="model"/>
 
 ## Model
 - The *Input*'s predicates are used to populate the model.
@@ -107,6 +133,8 @@ For each soft constraint we wrote an example of a schedule that would be chosen 
 - The *Output*'s predicate reveals the time table schedule.
 
 - The *Supporting*'s predicates are used to describe some restrictions or as alias to other predicates.
+
+<a name="model-input-hard"/>
 
 ### Input - Hard Constrains Input Predicates
 
@@ -188,8 +216,9 @@ Example:
 joint(macAAA, macBBB).
 ```
 
+<a name="model-input-soft"/>
 
-### Input - Weak Constrains Input Predicates
+### Input - Soft Constrains Input Predicates
 ####  **curriculum/2(course id, curriculum, required)**: 
 
 Identifies a course as part of a curriculum. If the course is required for the conclusion of the curriculum, the last parameter is 1, else 0.
@@ -209,6 +238,7 @@ preferable(profAAA, 121). % profAAA prefers to lecture classes on monday's first
 
 preferable(profAAA, 212). % profAAA prefers to lecture classes on tuesday's second period of the morning
 ```
+<a name="model-output"/>
 
 ### Output
 ####  **class/4(course id, group id, teacher, period)**: 
@@ -219,8 +249,9 @@ It assigns a course and group to a teacher who will lecture it in a period.
 
 It is genarated so N classes of a given course are scheduled, considering the teachers available periods. 
 ```
-{ class(C, G, T, P) :- available(T, P) } == N :- course(C, G, T, N).
+{ class(C, G, T, P) : available(T, P) } == N :- course(C, G, T, N).
 ```
+<a name="model-supporting"/>
 
 ### Supporting
 
@@ -269,3 +300,8 @@ Example:
 teacher(profAAA).
 teacher(profBBB).
 ```
+
+<a name="about-us"/>
+
+## About Us
+We are a group of undergraduate and postgraduate Computer Science students from the Institute of Mathematics and Statistics - University of São Paulo. This project was developed during the MAC0472 course in the second semester of 2022.
