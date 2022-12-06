@@ -1,8 +1,8 @@
 %*
 Soft #12
 -------------------------------------
-Classes should not be given in consecutive days
+Classes should not be given in different times of the day (morning/afternoon)
 *%
-weak(100, 1,Id) :- class(C1, G1, _, P1), class(C1, G1, _, P2),
-               P1 != P2, @get_digit(P1,3) == @get_digit(P2,3)+1,
-               Id = @concat("sc12",C1,G1).
+weak(50, 1,Id) :- class(C1, G1, _, P1), class(C1, G1, _, P2), P1 != P2,
+               @get_digit(P1,2) != @get_digit(P2,2),
+               Id = @concat("sc13",C1,G1).

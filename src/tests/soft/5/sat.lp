@@ -6,42 +6,31 @@ teacher(profAAA).
 teacher(profBBB).
 
 %*
-course/4(course id, group_id, teacher name)
--------------------------------------------
+course/3(course id, group_id, teacher name, number of weekly courses)
+------------------------------------------------------------
 *%
-course(mac111,45,profAAA).
-course(mac222,45,profBBB).
-course(mac333,45,profCCC).
+course(macObligatory1, 1, profAAA, 1).
+course(macNotScience1, 1, profAAA, 1).
+course(macNotScience2, 1, profBBB, 1).
+course(macSciences1, 1, profBBB, 1).
 
 %*
 available/3(teacher name, period, is preferable)
 ---------------------------------
 *%
-available(profAAA,211,0).
-available(profAAA,311,0).
-available(profAAA,411,0).
-
-available(profBBB,211,0).
-
-available(profCCC,411,0).
+available(profAAA, 111, 0).
+available(profAAA, 211, 0).
+available(profBBB, 111, 0).
+available(profBBB, 211, 0).
 
 %*
-num_classes/2(course id, number of weekly courses)
---------------------------------------------------
+obligatory/2(course id, ideal period):
 *%
-num_classes(mac111,2).
-num_classes(mac222,1).
-num_classes(mac333,1).
+obligatory(macObligatory1, 1).
 
 %*
-obligatory/2(course id, ideal period)
--------------------------------------
+curriculum/2(course id, curriculum)
+-----------------------------------
+Identifies a course as part of a curriculum.
 *%
-obligatory(mac111,4).
-
-%*
-requiredElective/2(course id, curriculum)
-----------------------------------
-*%
-requiredElective(mac222,statistics).
-requiredElective(mac333,statistics).
+curriculum(macSciences1, sciences, 1).
