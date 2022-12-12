@@ -1,11 +1,12 @@
 %*
-Soft #5
+Soft #4
 -------------------------------------
-Statistics courses and mandatory classes from 2nd year onwards should not conflict
+Science courses  should not conflict with other obligatory
 *%
 
-weak(W, Pr, Id) :- requiredElective(Cstat,statistics), obligatory(C2,X), X >= 3,
-                 conflict(Cstat,Gstat,C2,G2,_),
-                 W = @get_weight("sc5"),
-                 Pr = @get_priority("sc5"),
-                 Id = @concat("sc5",Cstat,Gstat,C2,G2).
+weak(W, Pr, Id) :- class(C1, G1, _, P), class(C2, G2, _, P),
+              curriculum(C1, sciences, 1),
+              obligatory(C2, _),
+              W = @get_weight("sc4"),
+              Pr = @get_priority("sc4"),
+              Id = @concat("sc4",C1,G1,C2,G2).

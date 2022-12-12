@@ -1,14 +1,11 @@
 %*
-Soft #10
+Soft #14
 -------------------------------------
-Non-mandatory courses in a curriculum should not conflict
-with other non-mandatory courses in this curriculum.
+Courses should be given on teachers' preferred days
 *%
-
-weak(W, Pr, Id) :- class(C1, G1, _, P), class(C2, G2, _, P),
-              conflict(C1, G1, C2, G2, P),
-              C1 > C2,
-              curriculum(C1, CUR, 0), curriculum(C2, CUR, 0),
-              W = @get_weight("sc10"),
-              Pr = @get_priority("sc10"),
-              Id = @concat("sc10",C1,G1,C2,G2).
+weak(W, Pr, ID) :- class(C1, G1, T1, P1),
+                   available(T2, P2, 0),
+                   T1 == T2, P1 == P2,
+                   W = @get_weight("sc14"),
+                   Pr = @get_priority("sc14"),
+                   ID = @concat("sc14", T1, P1).
