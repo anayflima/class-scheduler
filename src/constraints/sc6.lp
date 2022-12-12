@@ -1,5 +1,5 @@
 %*
-Soft #5
+Soft #6
 -------------------------------------
 Statistics courses and mandatory classes from 2nd year onwards should not conflict
 *%
