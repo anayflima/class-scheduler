@@ -58,7 +58,7 @@ These rules and their weights were discussed between the students and represents
 
 <a name="index-soft"/>
 
-file | Constrain 
+file | Constraint 
 ---|---
 hc1|Two classes lectured by the same teacher cannot conflict, unless they are the same courses but with 2 initials.
 hc2|All courses defined for the semester must be given.
@@ -73,7 +73,7 @@ hc10| If two classes are joint and taught by the same professor, they have to be
 
 ### Soft Constraints
 
-file | Constrain
+file | Constraint
 ---|---
 sc1 | Required courses should not conflict with electives of close periods.
 sc2 | Required courses should not conflict with required courses of differents periods.
