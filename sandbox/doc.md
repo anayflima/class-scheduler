@@ -6,7 +6,6 @@ This project aims to facilitate the process of scheduling classes. Given the cla
 
 ### Table of Content:
 - [Running the code](#how-run) <!--- to do -->
-- [How the program works](#how-works) <!--- to do -->
 - [Logic](#logic)
 - [Constrains Indexes](#index) <!--- to do -->
     - [Hard Constraints](#index-hard) <!--- to do -->
@@ -30,21 +29,7 @@ This project aims to facilitate the process of scheduling classes. Given the cla
 
 ## Running the code
 
-<a name="how-works"/>
-
-## How the program works
-
-<!--
-Make UML
-
-csv input files > clingo input files > satisfies hard constraints (restrictions) > weights soft constraints (weak restrictions) > models with scores > csv schedule table
-
-Once finished, explain the commands to run
-
-Direct to the contributing file
--->
-
-<a name="logic"/>
+<a name="logic"/> 
 
 ## Logic
 
@@ -73,15 +58,36 @@ These rules and their weights were discussed between the students and represents
 
 <a name="index-soft"/>
 
-<!---
-make table
---->
+file | Constrain 
+---|---
+hc1|Two classes lectured by the same teacher cannot conflict, unless they are the same courses but with 2 initials.
+hc2|All courses defined for the semester must be given.
+hc3 |Each courses assigned for the semester must have a defined number of classes per week.
+hc4 | The classes must be given in the avaliable schedule for each teacher.
+hc5 | No graduation classes can be scheduled on friday in the afternoon.
+hc6 | Required courses offered in the same ideal period must not conflict.
+hc7 | There are constant periods for obligatory courses from 1st and 2nd year .
+hc8 | Some courses have practical class right after the theoretical class (double).
+hc9 | Classes of the same course and group cannot be given on the same day.
+hc10| If two classes are joint and taught by the same professor, they have to be lectured at the same periods.
 
 ### Soft Constraints
 
-<!---
-make table
---->
+file | Constrain
+---|---
+sc1 | Required courses should not conflict with electives of close periods.
+sc2 | Required courses should not conflict with required courses of differents periods.
+sc3 | Mandatory courses to complete a curriculum should not conflict with other courses in this curriculum, mandatory or not.
+sc4 | Non-mandatory courses in a curriculum should not conflict with other non-mandatory courses in this curriculum.
+sc5 | Science courses  should not conflict with other obligatory.
+sc6 | Statistics courses and mandatory classes from 2nd year onwards should not conflict.
+sc7 | Courses should not conflict with other courses of the same postgraduate curriculum.
+sc8 | High demand post grad courses should not conflict.
+sc9 | Post graduate courses should not conflict with other post graduate courses of the same scope.
+sc10| Courses should be given on teachers' preferred days.
+sc11| Classes should not be given in consecutive days.
+sc12| Classes should not be given in different times of the day (morning/afternoon).
+sc13| Avoid all kinds of conflicts.
 
 <a name="parser"/>
 
