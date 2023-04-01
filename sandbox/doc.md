@@ -75,15 +75,15 @@ hc10| If two classes are joint and taught by the same professor, they have to be
 
 file | Constraint
 ---|---
-sc1 | Required courses should not conflict with electives of close periods.
-sc2 | Required courses should not conflict with required courses of differents periods.
-sc3 | Mandatory courses to complete a curriculum should not conflict with other courses in this curriculum, mandatory or not.
-sc4 | Non-mandatory courses in a curriculum should not conflict with other non-mandatory courses in this curriculum.
-sc5 | Science courses  should not conflict with other obligatory.
-sc6 | Statistics courses and mandatory classes from 2nd year onwards should not conflict.
-sc7 | Courses should not conflict with other courses of the same postgraduate curriculum.
-sc8 | High demand post grad courses should not conflict.
-sc9 | Post graduate courses should not conflict with other post graduate courses of the same scope.
+sc01 | Required courses should not conflict with electives of close periods.
+sc02 | Required courses should not conflict with required courses of differents periods.
+sc03 | Mandatory courses to complete a curriculum should not conflict with other courses in this curriculum, mandatory or not.
+sc04 | Non-mandatory courses in a curriculum should not conflict with other non-mandatory courses in this curriculum.
+sc05 | Science courses  should not conflict with other obligatory.
+sc06 | Statistics courses and mandatory classes from 2nd year onwards should not conflict.
+sc07 | Courses should not conflict with other courses of the same postgraduate curriculum.
+sc08 | High demand post grad courses should not conflict.
+sc09 | Post graduate courses should not conflict with other post graduate courses of the same scope.
 sc10| Courses should be given on teachers' preferred days.
 sc11| Classes should not be given in consecutive days.
 sc12| Classes should not be given in different times of the day (morning/afternoon).
